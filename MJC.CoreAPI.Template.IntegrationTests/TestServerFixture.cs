@@ -37,7 +37,7 @@ namespace MJC.CoreAPI.Template.IntegrationTests
         {
             string testProjectPath = PlatformServices.Default.Application.ApplicationBasePath;
 
-            var relativePathToApiProject = @"..\..\..\..\..\MJC.CoreAPI.Template.WebAPI\MJC.CoreAPI.Template.WebAPI";
+            var relativePathToApiProject = @"..\..\..\..\..\MJC.CoreAPI.Template\MJC.CoreAPI.Template.WebAPI";
 
             return Path.Combine(testProjectPath, relativePathToApiProject);
         }

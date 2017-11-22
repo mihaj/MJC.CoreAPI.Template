@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJC.CoreAPI.Template.WebAPI", "MJC.CoreAPI.Template.WebAPI\MJC.CoreAPI.Template.WebAPI.csproj", "{CF363F60-457E-464B-8443-EA0B51C9C81F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJC.CoreAPI.Template.IntegrationTests", "MJC.CoreAPI.Template.IntegrationTests\MJC.CoreAPI.Template.IntegrationTests.csproj", "{65BB4EAB-68C3-46FB-8000-630BE01C409C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJC.CoreAPI.Template.UnitTests", "MJC.CoreAPI.Template.UnitTests\MJC.CoreAPI.Template.UnitTests.csproj", "{D9566761-08F4-46E0-BA5F-0754A699035F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{CF363F60-457E-464B-8443-EA0B51C9C81F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF363F60-457E-464B-8443-EA0B51C9C81F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF363F60-457E-464B-8443-EA0B51C9C81F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65BB4EAB-68C3-46FB-8000-630BE01C409C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65BB4EAB-68C3-46FB-8000-630BE01C409C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65BB4EAB-68C3-46FB-8000-630BE01C409C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65BB4EAB-68C3-46FB-8000-630BE01C409C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9566761-08F4-46E0-BA5F-0754A699035F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9566761-08F4-46E0-BA5F-0754A699035F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9566761-08F4-46E0-BA5F-0754A699035F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9566761-08F4-46E0-BA5F-0754A699035F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

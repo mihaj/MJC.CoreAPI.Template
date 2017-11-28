@@ -34,9 +34,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
         {
             try
             {
-                IEnumerable<Dummy> dummies = null;
-
-                dummies = _unitOfWork.Dummies.GetDummies();
+                IEnumerable<Dummy> dummies = _unitOfWork.Dummies.GetDummies();
 
                 if (dummies != null && dummies.Count() > 0)
                 {

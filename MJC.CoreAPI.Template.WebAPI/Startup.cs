@@ -30,14 +30,14 @@ namespace MJC.CoreAPI.Template.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApiVersioning(
-        o =>
-        {
-            o.AssumeDefaultVersionWhenUnspecified = true;
-            o.DefaultApiVersion = new ApiVersion(1, 0);
-            o.ReportApiVersions = true;
-            o.ApiVersionReader = ApiVersionReader.Combine(new QueryStringApiVersionReader()
-                , new HeaderApiVersionReader(new string[] { "ver", "X-DummyAPI-version" }));
-        });
+                    o =>
+                    {
+                        o.AssumeDefaultVersionWhenUnspecified = true;
+                        o.DefaultApiVersion = new ApiVersion(1, 0);
+                        o.ReportApiVersions = true;
+                        o.ApiVersionReader = ApiVersionReader.Combine(new QueryStringApiVersionReader()
+                            , new HeaderApiVersionReader(new string[] { "ver", "X-DummyAPI-version" }));
+                    });
 
             services.AddMvc()
                     .AddMvcOptions(o =>
@@ -77,7 +77,9 @@ namespace MJC.CoreAPI.Template.WebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app,
+            IHostingEnvironment env,
+            ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
 

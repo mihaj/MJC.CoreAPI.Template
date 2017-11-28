@@ -1,14 +1,9 @@
-﻿using System;
+﻿using MJC.CoreAPI.Template.WebAPI.Core.Entities;
+using MJC.CoreAPI.Template.WebAPI.Core.Repositories;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
-using MJC.CoreAPI.Template.WebAPI.Data.Entities;
-using MJC.CoreAPI.Template.WebAPI.Data;
-using MJC.CoreAPI.Template.WebAPI.Data.Repositories;
 
-namespace MJC.CoreAPI.Template.WebAPI.Data.Repositories
+namespace MJC.CoreAPI.Template.WebAPI.Persistence.Repositories
 {
     public class DummyApiRepository : IDummyApiRepository
     {
@@ -19,14 +14,14 @@ namespace MJC.CoreAPI.Template.WebAPI.Data.Repositories
             _ctx = ctx;
         }
 
-        public void Add<T>(T entity) where T : class
+        public void Add(Dummy dummy)
         {
-            _ctx.Add(entity);
+            _ctx.Add(dummy);
         }
 
-        public void Delete<T>(T entity) where T : class
+        public void Delete(Dummy dummy)
         {
-            _ctx.Remove(entity);
+            _ctx.Remove(dummy);
         }
 
         public bool Save()

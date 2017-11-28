@@ -1,17 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Newtonsoft.Json.Serialization;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using System.IO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
-using MJC.CoreAPI.Template.WebAPI.Data;
-using MJC.CoreAPI.Template.WebAPI.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using MJC.CoreAPI.Template.WebAPI.Persistence;
+using Newtonsoft.Json.Serialization;
+using System.IO;
 
 namespace MJC.CoreAPI.Template.WebAPI
 {
@@ -74,7 +73,7 @@ namespace MJC.CoreAPI.Template.WebAPI
                     );
             }
 
-            services.AddScoped<IDummyApiRepository, DummyApiRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

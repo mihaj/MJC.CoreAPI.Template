@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MJC.CoreAPI.Template.WebAPI.Data.Entities;
+using MJC.CoreAPI.Template.WebAPI.Core.Entities;
+using MJC.CoreAPI.Template.WebAPI.Persistence.EntityConfigurations;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace MJC.CoreAPI.Template.WebAPI.Data
+namespace MJC.CoreAPI.Template.WebAPI.Persistence
 {
     public class DummyApiContext : DbContext
     {
@@ -20,9 +20,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Dummy>().Property(b => b.CreatedAt).HasDefaultValueSql("getdate()");
-            modelBuilder.Entity<Dummy>().Property(b => b.UpdatedAt).HasDefaultValueSql("getdate()");
-            modelBuilder.Entity<Dummy>().Property(b => b.UpdatedAt).HasComputedColumnSql("getdate()");
+            modelBuilder.ApplyConfiguration(new DummyConfiguration());
         }
 
 

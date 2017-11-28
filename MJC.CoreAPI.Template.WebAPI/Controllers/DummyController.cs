@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MJC.CoreAPI.Template.WebAPI.Data.Entities;
-using MJC.CoreAPI.Template.WebAPI.Data.Repositories;
+using MJC.CoreAPI.Template.WebAPI.Core.Dtos.Dummy;
+using MJC.CoreAPI.Template.WebAPI.Core.Entities;
 using MJC.CoreAPI.Template.WebAPI.Filters;
+using MJC.CoreAPI.Template.WebAPI.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MJC.CoreAPI.Template.WebAPI.Controllers
 {
@@ -17,15 +17,15 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
     [ApiVersion("1.0")]
     public class DummyController : Controller
     {
-        private readonly IDummyApiRepository _repo;
+        private readonly IUnitOfWork _unitOfWork;
         private ILogger<DummyController> _logger;
         private IMapper _mapper;
 
-        public DummyController(IDummyApiRepository dummyApiRepository,
+        public DummyController(IUnitOfWork unitOfWork,
             ILogger<DummyController> logger,
             IMapper mapper)
         {
-            _repo = dummyApiRepository;
+            _unitOfWork = unitOfWork;
             _logger = logger;
             _mapper = mapper;
         }
@@ -36,7 +36,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
             {
                 IEnumerable<Dummy> dummies = null;
 
-                dummies = _repo.GetDummies();
+                dummies = _unitOfWork.Dummies.GetDummies();
 
                 if (dummies != null && dummies.Count() > 0)
                 {
@@ -61,7 +61,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
         {
             try
             {
-                var dummy = _repo.GetDummy(dummyId);
+                var dummy = _unitOfWork.Dummies.GetDummy(dummyId);
 
                 if (dummy != null)
                 {
@@ -89,11 +89,11 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
                 _logger.LogInformation("Creating a new dummy.");
                 var dummy = _mapper.Map<Dummy>(model);
 
-                if (!_repo.DummyExists(dummy.Name))
+                if (!_unitOfWork.Dummies.DummyExists(dummy.Name))
                 {
-                    _repo.Add(dummy);
+                    _unitOfWork.Dummies.Add(dummy);
 
-                    if (_repo.Save())
+                    if (_unitOfWork.Complete())
                     {
                         var newUri = Url.Link("DummyGet", new { dummyId = dummy.Id });
                         return Created(newUri, _mapper.Map<DummyDto>(dummy));
@@ -123,7 +123,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
         {
             try
             {
-                var oldDummy = _repo.GetDummy(dummyId);
+                var oldDummy = _unitOfWork.Dummies.GetDummy(dummyId);
 
                 if (oldDummy == null)
                 {
@@ -132,7 +132,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
 
                 _mapper.Map(model, oldDummy);
 
-                if (_repo.Save())
+                if (_unitOfWork.Complete())
                 {
                     return Ok(_mapper.Map<DummyDtoForUpdate>(oldDummy));
                 }
@@ -151,7 +151,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
         {
             try
             {
-                var oldDummy = _repo.GetDummy(dummyId);
+                var oldDummy = _unitOfWork.Dummies.GetDummy(dummyId);
 
                 if (oldDummy == null)
                 {
@@ -165,7 +165,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
 
                 patchedDummy.ApplyTo(oldDummy);
 
-                if (_repo.Save())
+                if (_unitOfWork.Complete())
                 {
                     return Ok(_mapper.Map<DummyDtoForUpdate>(oldDummy));
                 }
@@ -183,16 +183,16 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
         {
             try
             {
-                var dummy = _repo.GetDummy(dummyId);
+                var dummy = _unitOfWork.Dummies.GetDummy(dummyId);
 
                 if (dummy == null)
                 {
                     return NotFound($"Could not found dummy with id {dummyId}.");
                 }
 
-                _repo.Delete(dummy);
+                _unitOfWork.Dummies.Delete(dummy);
 
-                if (_repo.Save())
+                if (_unitOfWork.Complete())
                 {
                     return Ok();
                 }

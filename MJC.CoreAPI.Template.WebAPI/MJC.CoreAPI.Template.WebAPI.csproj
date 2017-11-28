@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
+    <Folder Include="Persistence\Migrations\" />
     <Folder Include="Filters\" />
     <Folder Include="Services\" />
     <Folder Include="wwwroot\" />

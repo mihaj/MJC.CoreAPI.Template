@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using MJC.CoreAPI.Template.WebAPI.Data.Entities;
+using MJC.CoreAPI.Template.WebAPI.Core.Dtos.Dummy;
+using MJC.CoreAPI.Template.WebAPI.Core.Entities;
 
-namespace MJC.CoreAPI.Template.WebAPI.Data
+namespace MJC.CoreAPI.Template.WebAPI.Core
 {
     public class DummyApiMapperProfile : Profile
     {

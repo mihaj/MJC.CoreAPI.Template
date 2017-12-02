@@ -8,6 +8,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Core.Repositories
         IEnumerable<Dummy> GetDummies();
         Dummy GetDummy(int dummyId);
         bool DummyExists(string dummyName);
+        bool DummyExists(int dummyId);
         void Add(Dummy category);
         void Delete(Dummy category);
     }

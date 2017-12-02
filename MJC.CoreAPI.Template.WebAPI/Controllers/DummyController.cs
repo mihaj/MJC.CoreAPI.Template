@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -201,6 +202,17 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpPost("{dummyId}")]
+        public IActionResult BlockDummyCreation(int dummyId)
+        {
+            if (_unitOfWork.Dummies.DummyExists(dummyId))
+            {
+                return new StatusCodeResult(StatusCodes.Status409Conflict);
+            }
+
+            return NotFound();
         }
     }
 }

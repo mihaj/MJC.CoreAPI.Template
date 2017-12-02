@@ -129,5 +129,33 @@ namespace MJC.CoreAPI.Template.IntegrationTests
 
             Assert.Equal(HttpStatusCode.NotFound, postResponse.StatusCode);
         }
+
+        [Fact]
+        public async Task CreateDummyShouldBeConflictBecauseAlreadyExist()
+        {
+            HttpRequestMessage postRequest = new HttpRequestMessage(HttpMethod.Post, "api/dummies/1");
+
+            HttpResponseMessage postResponse = await fixture.Client.SendAsync(postRequest);
+
+            var responseString = await postResponse.Content.ReadAsStringAsync();
+
+            output.WriteLine(responseString);
+
+            Assert.Equal(HttpStatusCode.Conflict, postResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task CreateDummyShouldBeNotFoundIfUsingCreateWithId()
+        {
+            HttpRequestMessage postRequest = new HttpRequestMessage(HttpMethod.Post, "api/dummies/1000");
+
+            HttpResponseMessage postResponse = await fixture.Client.SendAsync(postRequest);
+
+            var responseString = await postResponse.Content.ReadAsStringAsync();
+
+            output.WriteLine(responseString);
+
+            Assert.Equal(HttpStatusCode.NotFound, postResponse.StatusCode);
+        }
     }
 }

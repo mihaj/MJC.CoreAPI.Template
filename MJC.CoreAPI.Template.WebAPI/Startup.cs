@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MJC.CoreAPI.Template.WebAPI.Persistence;
@@ -16,10 +15,10 @@ namespace MJC.CoreAPI.Template.WebAPI
 {
     public class Startup
     {
-        private readonly IConfiguration _config;
+        private readonly Microsoft.Extensions.Configuration.IConfiguration _config;
         private readonly IHostingEnvironment _env;
 
-        public Startup(IConfiguration config, IHostingEnvironment env)
+        public Startup(Microsoft.Extensions.Configuration.IConfiguration config, IHostingEnvironment env)
         {
             _config = config;
             _env = env;
@@ -42,6 +41,7 @@ namespace MJC.CoreAPI.Template.WebAPI
             services.AddMvc()
                     .AddMvcOptions(o =>
                     {
+                        o.ReturnHttpNotAcceptable = true;
                         o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
                         o.InputFormatters.Add(new XmlDataContractSerializerInputFormatter());
                     })
@@ -51,7 +51,7 @@ namespace MJC.CoreAPI.Template.WebAPI
                         {
                             o.SerializerSettings.ContractResolver = new DefaultContractResolver
                             {
-                                NamingStrategy = new SnakeCaseNamingStrategy()
+                                NamingStrategy = new CamelCaseNamingStrategy()
                             };
                         }
                     }

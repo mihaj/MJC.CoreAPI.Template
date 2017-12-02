@@ -57,5 +57,10 @@ namespace MJC.CoreAPI.Template.WebAPI.Persistence.Repositories
         {
             return _ctx.Dummies.Any(o => o.Name == dummyName);
         }
+
+        public bool DummyExists(int dummyId)
+        {
+            return _ctx.Dummies.Any(o => o.Id == dummyId);
+        }
     }
 }

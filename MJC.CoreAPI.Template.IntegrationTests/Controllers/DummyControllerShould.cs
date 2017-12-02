@@ -113,7 +113,7 @@ namespace MJC.CoreAPI.Template.IntegrationTests
 
             output.WriteLine(responseString);
 
-            Assert.Equal(HttpStatusCode.OK, postResponse.StatusCode);
+            Assert.Equal(HttpStatusCode.NoContent, postResponse.StatusCode);
         }
 
         [Fact]
@@ -135,6 +135,13 @@ namespace MJC.CoreAPI.Template.IntegrationTests
         {
             HttpRequestMessage postRequest = new HttpRequestMessage(HttpMethod.Post, "api/dummies/1");
 
+            var formData = new DummyDtoForUpdate()
+            {
+                Name = "Jackson"
+            };
+
+            postRequest.Content = new StringContent(JsonConvert.SerializeObject(formData), Encoding.UTF8, "application/json");
+
             HttpResponseMessage postResponse = await fixture.Client.SendAsync(postRequest);
 
             var responseString = await postResponse.Content.ReadAsStringAsync();
@@ -148,6 +155,13 @@ namespace MJC.CoreAPI.Template.IntegrationTests
         public async Task CreateDummyShouldBeNotFoundIfUsingCreateWithId()
         {
             HttpRequestMessage postRequest = new HttpRequestMessage(HttpMethod.Post, "api/dummies/1000");
+
+            var formData = new DummyDtoForUpdate()
+            {
+                Name = "Jackson"
+            };
+
+            postRequest.Content = new StringContent(JsonConvert.SerializeObject(formData), Encoding.UTF8, "application/json");
 
             HttpResponseMessage postResponse = await fixture.Client.SendAsync(postRequest);
 

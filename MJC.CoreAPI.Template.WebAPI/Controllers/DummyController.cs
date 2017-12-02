@@ -193,7 +193,7 @@ namespace MJC.CoreAPI.Template.WebAPI.Controllers
 
                 if (_unitOfWork.Complete())
                 {
-                    return Ok();
+                    return NoContent();
                 }
             }
             catch (Exception ex)
